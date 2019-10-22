@@ -1,10 +1,9 @@
 import Sequelize, { Model } from 'sequelize';
 
-class Post extends Model {
+class Comment extends Model {
   static init(sequelize) {
     super.init(
       {
-        title: Sequelize.STRING,
         content: Sequelize.STRING,
       },
       {
@@ -16,10 +15,10 @@ class Post extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.User, { foreignKey: 'user_id', as: 'writer' });
-    this.hasMany(models.Comment, { foreignKey: 'post_id', as: 'comments' });
+    this.belongsTo(models.User, { foreignKey: 'user_id' });
+    this.belongsTo(models.Post, { foreignKey: 'post_id' });
   }
 
 }
 
-export default Post;
+export default Comment;
